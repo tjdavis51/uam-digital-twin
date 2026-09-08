@@ -1,0 +1,23 @@
+# Colcon outputs
+build/
+install/
+log/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Simulation/runtime output
+*.ulg
+*.mcap
+*.db3
+*.bson
+bags/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+*~
