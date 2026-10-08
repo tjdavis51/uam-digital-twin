@@ -18,8 +18,30 @@ vendored here. Their exact revisions are recorded in `config/versions.env` and
 `setup/workspace.repos`.
 
 The dependency workspace uses normal `colcon build`, matching the validated
-checkpoint. Future project-owned ROS packages under `src/` may use a separate
-symlink-install development workspace if desired.
+checkpoint. This repository is a separate project overlay; no nested ROS workspace
+is needed. The existing dependency build remains unchanged.
+
+## Controller workbench
+
+```bash
+./scripts/test_workbench.sh
+```
+
+The ROS-independent C++17 core builds on macOS or Linux with CMake. Infrastructure
+tests pass; three algorithm acceptance tests intentionally skip until you implement
+the PD, hold, and smooth-axis functions. Use `-DUAM_REQUIRE_ALGORITHMS=ON` to make
+unfinished algorithms fail acceptance. See [the implementation guide](docs/WORKBENCH.md)
+and [interface conventions](docs/INTERFACES.md).
+
+On the Ubuntu/Jazzy VM, `./scripts/build_project.sh` builds `uam_core` and
+`uam_interfaces` into `install/project`; the existing `build_all.sh` still builds
+only third-party support and PX4.
+
+The physical UAM is a primary target. Gazebo X500 is a temporary PX4 integration
+and safety fixture, not a representative UAM modeling target. Physical auditing
+and baseline collection can proceed alongside SITL work after numerical acceptance.
+Begin Simcenter restoration when access is available; the intended long-term
+simulator remains PX4 SITL + Simcenter, subject to feasibility.
 
 ## Existing machine quick start
 

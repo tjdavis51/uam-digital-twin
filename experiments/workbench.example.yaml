@@ -1,0 +1,42 @@
+# Design template, not a runtime configuration loader or a flight-ready experiment.
+schema_version: 1
+experiment_id: numerical_workbench
+backend: numerical
+frames:
+  world: odom
+  body: base_link
+controller:
+  type: diagonal_pd
+  # Numerical acceptance-test values only. Not tuned or approved for any aircraft.
+  kp: [2.0, 3.0, 4.0]
+  kv: [0.5, 1.0, 1.5]
+trajectory:
+  type: hold
+  position_m: [1.0, -2.0, 3.0]
+  yaw_rad: 0.4
+# Alternative trajectory block:
+# trajectory:
+#   type: smooth_axis
+#   start_m: [1.0, 2.0, 3.0]
+#   axis: 0
+#   displacement_m: 2.0
+#   duration_s: 4.0
+#   yaw_rad: 0.3
+runtime:
+  enabled: false
+  use_sim_time: false
+  proposed_rate_hz: 50.0
+  # Unset values MUST prevent a future runtime launcher from starting control.
+  state_timeout_s: null
+  reference_timeout_s: null
+  command_timeout_s: null
+  maximum_stream_skew_s: null
+limits:
+  maximum_speed_m_s: null
+  horizontal_acceleration_m_s2: null
+  vertical_acceleration_m_s2: null
+  maximum_yaw_rate_rad_s: null
+  minimum_position_m: null
+  maximum_position_m: null
+arm:
+  configuration: unspecified
